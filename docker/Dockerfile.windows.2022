@@ -8,6 +8,12 @@ RUN `
   && tar -C c:\git -oxzf tmp/file.zip`
   && rmdir /Q /S tmp
 
+RUN `
+  mkdir tmp`
+  && curl -sSfLo tmp/file.zip https://github.com/git-lfs/git-lfs/releases/download/v3.1.2/git-lfs-windows-amd64-v3.1.2.zip `
+  && tar -C c:\git\usr\bin -oxzf tmp/file.zip`
+  && rmdir /Q /S tmp
+
 ADD windows/* /bin/
 
 # https://github.com/PowerShell/PowerShell/issues/6211#issuecomment-367477137
