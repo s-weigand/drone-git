@@ -48,6 +48,10 @@ $Env:GIT_COMMITTER_EMAIL = $Env:GIT_AUTHOR_EMAIL
 # TODO we should ultimately look at the ref, since
 # we need something compatible with deployment events.
 
+# Prevent git clone error "fatal: the remote end hung up unexpectedly"
+# Ref: https://stackoverflow.com/questions/15240815/git-fatal-the-remote-end-hung-up-unexpectedly
+git config --global http.postBuffer 524288000
+
 switch ($Env:DRONE_BUILD_EVENT) {
     "pull_request" {
         Invoke-Expression "${PSScriptRoot}\clone-pull-request.ps1"
