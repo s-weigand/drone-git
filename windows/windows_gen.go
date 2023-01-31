@@ -73,7 +73,7 @@ switch ($Env:DRONE_BUILD_EVENT) {
 const CloneCommit = `
 Set-Variable -Name "FLAGS" -Value ""
 if ($Env:PLUGIN_DEPTH) {
-    Set-Variable -Name "FLAGS" -Value "--depth=$Env:PLUGIN_DEPTH"
+    Set-Variable -Name "FLAGS" -Value " --depth=$Env:PLUGIN_DEPTH"
 }
 
 if (!(Test-Path .git)) {
@@ -83,8 +83,8 @@ if (!(Test-Path .git)) {
 	git remote add origin $Env:DRONE_REMOTE_URL
 }
 
-Write-Host "git fetch $FLAGS origin +refs/heads/${Env:DRONE_COMMIT_BRANCH}:";
-git fetch $FLAGS origin "+refs/heads/${Env:DRONE_COMMIT_BRANCH}:";
+Write-Host "git fetch$FLAGS origin +refs/heads/${Env:DRONE_COMMIT_BRANCH}:";
+git fetch$FLAGS origin "+refs/heads/${Env:DRONE_COMMIT_BRANCH}:";
 Write-Host "git checkout $Env:DRONE_COMMIT_SHA -b $Env:DRONE_COMMIT_BRANCH";
 git checkout $Env:DRONE_COMMIT_SHA -b $Env:DRONE_COMMIT_BRANCH;
 `
@@ -93,7 +93,7 @@ git checkout $Env:DRONE_COMMIT_SHA -b $Env:DRONE_COMMIT_BRANCH;
 const ClonePullRequest = `
 Set-Variable -Name "FLAGS" -Value ""
 if ($Env:PLUGIN_DEPTH) {
-    Set-Variable -Name "FLAGS" -Value "--depth=$Env:PLUGIN_DEPTH"
+    Set-Variable -Name "FLAGS" -Value " --depth=$Env:PLUGIN_DEPTH"
 }
 
 if (!(Test-Path .git)) {
@@ -101,7 +101,7 @@ if (!(Test-Path .git)) {
 	git remote add origin $Env:DRONE_REMOTE_URL
 }
 
-git fetch $FLAGS origin "+refs/heads/${Env:DRONE_COMMIT_BRANCH}:"
+git fetch$FLAGS origin "+refs/heads/${Env:DRONE_COMMIT_BRANCH}:"
 git checkout $Env:DRONE_COMMIT_BRANCH
 
 git fetch origin "${Env:DRONE_COMMIT_REF}:"
@@ -112,7 +112,7 @@ git merge $Env:DRONE_COMMIT_SHA
 const CloneTag = `
 Set-Variable -Name "FLAGS" -Value ""
 if ($Env:PLUGIN_DEPTH) {
-    Set-Variable -Name "FLAGS" -Value "--depth=$Env:PLUGIN_DEPTH"
+    Set-Variable -Name "FLAGS" -Value " --depth=$Env:PLUGIN_DEPTH"
 }
 
 if (!(Test-Path .git)) {
@@ -120,7 +120,7 @@ if (!(Test-Path .git)) {
 	git remote add origin $Env:DRONE_REMOTE_URL
 }
 
-git fetch $FLAGS origin "+refs/tags/${Env:DRONE_TAG}:"
+git fetch$FLAGS origin "+refs/tags/${Env:DRONE_TAG}:"
 git checkout -qf FETCH_HEAD
 `
 
