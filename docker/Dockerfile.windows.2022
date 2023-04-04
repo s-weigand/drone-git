@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/powershell:nanoserver-ltsc2022
+FROM mcr.microsoft.com/powershell:windowsservercore-ltsc2022
 
 RUN `
   mkdir tmp && mkdir git`
